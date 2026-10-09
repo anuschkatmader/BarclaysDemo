@@ -20,7 +20,7 @@
     document.querySelectorAll('.panel').forEach(function (p) { p.classList.toggle('active', p.id === 'panel-' + id); });
     // Account-opening form: install only once its container is visible and laid out.
     if (id === 'open') requestAnimationFrame(function () { requestAnimationFrame(function () {
-      Demo.installForm('#ot-container-softoptin', OT.softOptInCpId);
+      Demo.installForm('#ot-container', OT.softOptInCpId);
     }); });
   }
   document.querySelectorAll('.side button').forEach(function (b) {
@@ -75,7 +75,7 @@
      The purpose is a hidden checkbox with default value Checked (= implicit consent on submit).
      We move our visible opt-out box into the form above the submit button and keep the hidden
      field in sync with it: opt-out ticked → hidden purpose field unchecked.                      */
-  var SOFT = '#ot-container-softoptin';
+  var SOFT = '#ot-container';
   var softWired = false;
   var optBox = document.getElementById('softOptOutBox'); // kept as a reference: it may move into a shadow root
 
