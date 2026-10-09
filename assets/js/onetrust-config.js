@@ -20,7 +20,7 @@
    ============================================================================ */
 window.OT_CONFIG = {
   webformCpId:   "",
-  softOptInCpId: "",
+  softOptInCpId: "aaf0d808-8b79-4ec8-8f9b-8eab56daa3fe", // "Account Opening - Soft Opt-In" (button trigger id minus "ot-")
   prefCenterUrl: "",
   popupDelayMs:  3500
 };
