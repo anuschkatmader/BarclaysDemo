@@ -16,10 +16,13 @@
 <script type="text/javascript">function OptanonWrapper(){}</script>
 -->
 
-<!-- 2) OneTrust embedded web form (UCPM) — uncomment, set data-id, and set webformCpId in assets/js/onetrust-config.js
+<!-- 2) OneTrust embedded web form — "Newsletter Pop-Up Banking" (explicit consent).
+     The OtSdk queue stub is defined in onetrust-config.js, which loads above.
+     Collection point ID (button trigger minus "ot-") is webformCpId in onetrust-config.js.
+     Renders into <div id="ot-container-main"> in the "Money tips" section below. -->
 <script src="https://privacyportaltrial.onetrust.com/consent-embedded-forms/consent-receipt-scripts/OtFormStub.js"
-        data-id="YOUR-WEB-FORM-ID" worker="https://consent-api.onetrust.com"></script>
--->
+        data-id="89af9315-196c-45ad-88ea-1b8ec3fe5a51"
+        worker="https://consent-api.onetrust.com"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -146,7 +149,7 @@
     </div>
   </section>
 
-  <!-- Inline sign-up for visitors who closed the pop-up -->
+  <!-- Newsletter sign-up — OneTrust collection point "Newsletter Pop-Up Banking" -->
   <section class="signup-band" id="signup">
     <div class="wrap">
       <div>
@@ -159,8 +162,15 @@
         </ul>
       </div>
       <div class="signup-panel">
-        <!-- ONETRUST EMBEDDED WEB FORM — second instance of the same collection point -->
-        <div id="ot-container-inline"></div>
+        <!-- ==================================================================
+             ONETRUST EMBEDDED WEB FORM — explicit consent (Money tips, Product news).
+             Container id must match the collection point: ot-container-main.
+             ================================================================== -->
+        <div id="ot-container-main"></div>
+        <div class="slot-note" id="otMainFallback" hidden>
+          The OneTrust form didn't load. Check the collection point is published and this
+          domain is authorised in OneTrust, then reload.
+        </div>
         <div id="demoInline"></div>
       </div>
     </div>
@@ -178,30 +188,6 @@
     <div class="legal">Demo environment built for a OneTrust product demonstration. Not affiliated with, endorsed by or operated by Barclays. No real accounts, logins or personal data. Photos: Unsplash. · <a href="#" data-reset-demo style="display:inline;color:#cfe6f2">Reset demo</a></div>
   </div>
 </footer>
-
-<!-- =============================== NEWSLETTER POP-UP =============================== -->
-<div class="overlay" id="nlModal" role="dialog" aria-modal="true" aria-labelledby="nlTitle">
-  <div class="modal">
-    <div class="head photo-head">
-      <button class="close-x" onclick="closeNewsletter()" aria-label="Close">×</button>
-      <div class="ph">
-        <img src="assets/img/newsletter.jpg" alt=""
-             data-cdn="https://images.unsplash.com/photo-1573496782432-8690d8148c46?auto=format&fit=crop&w=1000&h=380&q=80"
-             onerror="this.onerror=null;this.src=this.dataset.cdn">
-      </div>
-      <div class="t">
-        <div class="brand">Barclays</div>
-        <h2 id="nlTitle">Make your money go further</h2>
-      </div>
-    </div>
-    <div class="body">
-      <p>Sign up for practical money tips, guides and offers chosen around your interests.</p>
-      <!-- ONETRUST EMBEDDED WEB FORM — installed when the pop-up opens -->
-      <div id="ot-container"></div>
-      <div id="demoPopup"></div>
-    </div>
-  </div>
-</div>
 
 <script src="assets/js/home.js"></script>
 </body>
