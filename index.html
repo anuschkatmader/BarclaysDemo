@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Barclays UCPM Demo</title>
+<!-- DEMO ENVIRONMENT — NOT AFFILIATED WITH BARCLAYS. OneTrust CMP / UCPM showcase only.
+     No login, no credentials, no balances or payments. -->
+
+<script src="assets/js/onetrust-config.js"></script>
+
+<!-- 1) OneTrust Cookie Consent (CMP) — uncomment and set the domain script ID
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+        charset="UTF-8" data-domain-script="YOUR-DOMAIN-SCRIPT-ID"></script>
+<script type="text/javascript">function OptanonWrapper(){}</script>
+-->
+
+<!-- 2) OneTrust embedded web form (UCPM) — uncomment, set data-id, and set webformCpId in assets/js/onetrust-config.js
+<script src="https://privacyportaltrial.onetrust.com/consent-embedded-forms/consent-receipt-scripts/OtFormStub.js"
+        data-id="YOUR-WEB-FORM-ID" worker="https://consent-api.onetrust.com"></script>
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+
+<div class="demo-ribbon">Demo environment for a OneTrust consent &amp; preference management showcase — not affiliated with Barclays. Fictional data only.</div>
+
+<header class="main">
+  <div class="wrap">
+    <a href="index.html" class="brand">Barclays <small>Demo</small></a>
+    <button class="seg-pill">Personal
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="hdr-right">
+      <button class="hdr-ico hide-sm" aria-label="Call us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg></button>
+      <button class="hdr-ico" aria-label="Find us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></button>
+      <button class="hdr-ico" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <!-- Demo: no credentials — goes straight to the signed-in persona's account page -->
+      <a href="account.html" class="acct-btn">Log in</a>
+      <button class="menu-btn" aria-label="Menu"><svg viewBox="0 0 30 26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 4h24M3 13h24M3 22h24"/></svg>Menu</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Personal banking</div>
+        <h1>Switch today, get rewarded</h1>
+        <p>Move to us with an offer that suits you. Explore our current accounts, savings range and more.</p>
+        <p class="small">Selected accounts. Eligibility criteria and terms apply.</p>
+        <a href="#products" class="btn btn-white">Explore all offers</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photos: local file in assets/img first, Unsplash CDN as fallback (see README) -->
+  <div class="photo hero-img">
+    <img src="assets/img/hero.jpg" alt="Woman and child running through a park"
+         data-cdn="https://images.unsplash.com/photo-1770872937837-267dadb4a138?auto=format&fit=crop&w=1800&h=1000&q=80"
+         onerror="this.onerror=null;this.src=this.dataset.cdn">
+    <div class="badge">Current account<br>switch guarantee</div>
+  </div>
+
+  <section id="products" class="intro">
+    <div class="wrap">
+      <h2>Your Barclays experience starts here</h2>
+      <p class="lead">See how we can help with current accounts, mortgages, insurance, loans, credit cards and savings.</p>
+      <div class="grid">
+        <div class="card"><div class="ico">£</div><h3>Current accounts</h3><p>Everyday banking with the app, contactless and instant notifications.</p><a href="#products">Compare accounts →</a></div>
+        <div class="card"><div class="ico">%</div><h3>Savings</h3><p>Easy-access and fixed-rate options to help you reach your goals.</p><a href="#products">See savings →</a></div>
+        <div class="card"><div class="ico">⌂</div><h3>Mortgages</h3><p>First-time buyer, remortgage or moving home — explore your options.</p><a href="#products">Explore mortgages →</a></div>
+        <div class="card"><div class="ico">→</div><h3>Loans</h3><p>Borrow for the things that matter, with a decision in minutes.</p><a href="#products">Check eligibility →</a></div>
+        <div class="card"><div class="ico">▭</div><h3>Credit cards</h3><p>Balance transfer, purchase and rewards cards to suit how you spend.</p><a href="#products">Find a card →</a></div>
+        <div class="card"><div class="ico">✓</div><h3>Insurance</h3><p>Home, travel and more — a safety net for the unexpected.</p><a href="#products">Get covered →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-slate">
+    <div class="wrap">
+      <div class="subs-card">
+        <div class="txt">
+          <h3>Offers and subscriptions</h3>
+          <p>Enjoy cashback and your favourite subscriptions through the app.</p>
+          <a href="#products" class="btn btn-cyan">View subscriptions</a>
+        </div>
+        <div class="img">
+          <img src="assets/img/subscriptions.jpg" alt="Woman relaxing on a sofa with her phone"
+               data-cdn="https://images.unsplash.com/photo-1758273705845-095eaa831790?auto=format&fit=crop&w=1000&h=800&q=80"
+               onerror="this.onerror=null;this.src=this.dataset.cdn" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="photo feature-img">
+    <img src="assets/img/credit-card.jpg" alt="Woman cycling across a bridge"
+         data-cdn="https://images.unsplash.com/photo-1728763377830-013769bc88b3?auto=format&fit=crop&w=1800&h=900&q=80"
+         onerror="this.onerror=null;this.src=this.dataset.cdn" loading="lazy">
+  </div>
+  <section class="band-slate" style="padding-top:48px">
+    <div class="wrap">
+      <h3>Platinum credit card</h3>
+      <p>Stay in control of your money and bring your credit card balances together in one place.</p>
+      <div class="rep">Representative</div>
+      <div class="apr">24.9% APR (variable)</div>
+      <p style="font-size:1rem">Subject to application and financial status. T&amp;Cs apply. 18+.</p>
+      <a href="#products" class="btn btn-cyan">Check your eligibility</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div class="photo">
+        <img src="assets/img/family-cycling.jpg" alt="Father and son cycling together"
+             data-cdn="https://images.unsplash.com/photo-1643632540114-5e2b3753919d?auto=format&fit=crop&w=1200&h=900&q=80"
+             onerror="this.onerror=null;this.src=this.dataset.cdn" loading="lazy">
+      </div>
+      <div>
+        <h2 class="sec" style="color:var(--ink);font-weight:800">Good money habits start early</h2>
+        <p class="lead">Help your children learn about saving and spending, with accounts and tips designed for every age.</p>
+        <a href="#signup" class="btn btn-navy">Get family money tips</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap split">
+      <div>
+        <h2 class="sec" style="color:var(--ink);font-weight:800">Ready for your next move?</h2>
+        <p class="lead">Whether it's your first home or your next one, see how much you could borrow and what support is available.</p>
+        <a href="#products" class="btn btn-navy">Explore mortgages</a>
+      </div>
+      <div class="photo">
+        <img src="assets/img/mortgage.jpg" alt="Couple moving into a new home"
+             data-cdn="https://images.unsplash.com/photo-1758523671285-9ff3f4e0ff38?auto=format&fit=crop&w=1200&h=900&q=80"
+             onerror="this.onerror=null;this.src=this.dataset.cdn" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Inline sign-up for visitors who closed the pop-up -->
+  <section class="signup-band" id="signup">
+    <div class="wrap">
+      <div>
+        <h2>Money tips, straight to your inbox</h2>
+        <p>Practical guides on saving, budgeting and buying a home — plus the occasional offer, only if you want it.</p>
+        <ul>
+          <li>Choose what you hear about and how often</li>
+          <li>Change your mind any time in My Barclays</li>
+          <li>One click to unsubscribe from every email</li>
+        </ul>
+      </div>
+      <div class="signup-panel">
+        <!-- ONETRUST EMBEDDED WEB FORM — second instance of the same collection point -->
+        <div id="ot-container-inline"></div>
+        <div id="demoInline"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Products</h4><a href="#products">Current accounts</a><a href="#products">Savings</a><a href="#products">Mortgages</a><a href="#products">Credit cards</a></div>
+      <div><h4>Help</h4><a href="#">Contact us</a><a href="#">Report fraud</a><a href="#">Accessibility</a><a href="#">Find a branch</a></div>
+      <div><h4>About</h4><a href="#">About us</a><a href="#">Careers</a><a href="#">Sustainability</a></div>
+      <div><h4>Privacy</h4><a href="#">Privacy policy</a><a href="#">Cookie policy</a><a href="#" data-cookie-settings>Cookie settings</a><a href="account.html#marketing">Marketing preferences</a></div>
+    </div>
+    <div class="legal">Demo environment built for a OneTrust product demonstration. Not affiliated with, endorsed by or operated by Barclays. No real accounts, logins or personal data. Photos: Unsplash. · <a href="#" data-reset-demo style="display:inline;color:#cfe6f2">Reset demo</a></div>
+  </div>
+</footer>
+
+<!-- =============================== NEWSLETTER POP-UP =============================== -->
+<div class="overlay" id="nlModal" role="dialog" aria-modal="true" aria-labelledby="nlTitle">
+  <div class="modal">
+    <div class="head photo-head">
+      <button class="close-x" onclick="closeNewsletter()" aria-label="Close">×</button>
+      <div class="ph">
+        <img src="assets/img/newsletter.jpg" alt=""
+             data-cdn="https://images.unsplash.com/photo-1573496782432-8690d8148c46?auto=format&fit=crop&w=1000&h=380&q=80"
+             onerror="this.onerror=null;this.src=this.dataset.cdn">
+      </div>
+      <div class="t">
+        <div class="brand">Barclays <small>Demo</small></div>
+        <h2 id="nlTitle">Make your money go further</h2>
+      </div>
+    </div>
+    <div class="body">
+      <p>Sign up for practical money tips, guides and offers chosen around your interests.</p>
+      <!-- ONETRUST EMBEDDED WEB FORM — installed when the pop-up opens -->
+      <div id="ot-container"></div>
+      <div id="demoPopup"></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/home.js"></script>
+</body>
+</html>

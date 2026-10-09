@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>My Barclays · UCPM Demo</title>
+<!-- DEMO ENVIRONMENT — NOT AFFILIATED WITH BARCLAYS. Fictional, already "signed-in" persona. -->
+
+<script src="assets/js/onetrust-config.js"></script>
+
+<!-- OneTrust Cookie Consent (CMP) — same domain script as index.html
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+        charset="UTF-8" data-domain-script="YOUR-DOMAIN-SCRIPT-ID"></script>
+<script type="text/javascript">function OptanonWrapper(){}</script>
+-->
+
+<!-- OneTrust embedded web form — ACCOUNT OPENING (soft opt-in collection point).
+     A different web form from the newsletter one on index.html: uncomment, set data-id,
+     and set softOptInCpId in assets/js/onetrust-config.js
+<script src="https://privacyportaltrial.onetrust.com/consent-embedded-forms/consent-receipt-scripts/OtFormStub.js"
+        data-id="YOUR-ACCOUNT-OPENING-WEB-FORM-ID" worker="https://consent-api.onetrust.com"></script>
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+
+<div class="demo-ribbon">Demo environment for a OneTrust consent &amp; preference management showcase — not affiliated with Barclays. Fictional data only.</div>
+
+<header class="main">
+  <div class="wrap">
+    <a href="index.html" class="brand">Barclays <small>Demo</small></a>
+    <button class="seg-pill">Personal
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="hdr-right">
+      <button class="hdr-ico hide-sm" aria-label="Call us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg></button>
+      <button class="hdr-ico" aria-label="Find us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></button>
+      <button class="hdr-ico" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <a href="index.html" class="acct-btn">Log out</a>
+      <button class="menu-btn" aria-label="Menu"><svg viewBox="0 0 30 26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 4h24M3 13h24M3 22h24"/></svg>Menu</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="acct-hero">
+    <div class="bg">
+      <img src="assets/img/account.jpg" alt=""
+           data-cdn="https://images.unsplash.com/photo-1758272422081-20d29fb67365?auto=format&fit=crop&w=1200&h=600&q=80"
+           onerror="this.onerror=null;this.src=this.dataset.cdn">
+    </div>
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">Home</a> › My Barclays</div>
+      <h1 id="greeting">Hello, Anuschka</h1>
+      <p>Manage your details, marketing preferences and how we contact you.</p>
+    </div>
+  </div>
+
+  <div class="wrap acct-layout">
+    <aside class="side" role="tablist">
+      <button data-panel="profile">Personal details</button>
+      <button data-panel="open">Open an account</button>
+      <button data-panel="marketing">Marketing preferences</button>
+      <button data-panel="comms">Communication settings</button>
+      <button data-panel="privacy">Privacy &amp; cookies</button>
+    </aside>
+
+    <div>
+      <!-- Profile -->
+      <div class="panel" id="panel-profile">
+        <h2>Personal details</h2>
+        <p class="lead">The details we hold about you. Fictional demo persona.</p>
+        <div class="box">
+          <dl class="kv">
+            <dt>Name</dt><dd>Anuschka Mader</dd>
+            <dt>Email</dt><dd>anuschka.mader@example.com</dd>
+            <dt>Mobile</dt><dd>07700 900 431</dd>
+            <dt>Address</dt><dd>14 Example Street, London, EC1A 0AA</dd>
+            <dt>Customer since</dt><dd>March 2017</dd>
+          </dl>
+        </div>
+        <div class="box promo-box">
+          <div>
+            <h3>Start saving today</h3>
+            <p>Open an Easy Access Saver in a couple of minutes.</p>
+          </div>
+          <a class="btn btn-navy" href="#open">Open an account</a>
+        </div>
+        <div class="box">
+          <h3>Your preferences at a glance</h3>
+          <p id="summaryLine">Loading…</p>
+          <a class="btn btn-navy" href="#marketing">Manage marketing preferences</a>
+        </div>
+      </div>
+
+      <!-- Account opening — SOFT OPT-IN collection point -->
+      <div class="panel" id="panel-open">
+        <h2>Open an Easy Access Saver</h2>
+        <p class="lead">Save as much or as little as you like, and withdraw whenever you need to.</p>
+
+        <ol class="steps">
+          <li class="done">Your details</li>
+          <li class="done">Your account</li>
+          <li class="now">Review and open</li>
+        </ol>
+
+        <div id="openFlow">
+          <div class="box">
+            <h3>Check your details</h3>
+            <dl class="kv" style="margin-top:12px">
+              <dt>Account</dt><dd>Easy Access Saver</dd>
+              <dt>Interest</dt><dd>3.10% AER (variable) <span class="d-note">· illustrative demo rate</span></dd>
+              <dt>Name</dt><dd>Anuschka Mader</dd>
+              <dt>Email</dt><dd>anuschka.mader@example.com</dd>
+              <dt>Paying in from</dt><dd>Your Barclays current account</dd>
+            </dl>
+          </div>
+
+          <div class="box">
+            <h3>Keeping in touch</h3>
+            <!-- ==================================================================
+                 ONETRUST EMBEDDED WEB FORM #2 — account opening (soft opt-in).
+                 Collection point: OT_CONFIG.softOptInCpId. Installed when this
+                 tab is first shown (the SDK won't render into a hidden container).
+                 ================================================================== -->
+            <div id="ot-container-softoptin"></div>
+            <div id="demoSoft"></div>
+          </div>
+        </div>
+
+        <div class="box open-ok" id="openOk" style="display:none">
+          <div class="tick">✓</div>
+          <h3>Your Easy Access Saver is open</h3>
+          <p id="openOkLine">We've recorded your marketing choices.</p>
+          <div class="btn-row" style="justify-content:center">
+            <a class="btn btn-navy" href="#marketing">See my marketing preferences</a>
+          </div>
+        </div>
+
+        <button class="notes-toggle" id="notesToggle" aria-expanded="false">Presenter notes</button>
+        <div class="notes" id="notes" hidden>
+          <h4>Soft opt-in vs explicit consent — OneTrust setup</h4>
+          <ul>
+            <li><b>Collection point:</b> "Account opening" web form (this page). The newsletter pop-up on the homepage is a separate collection point.</li>
+            <li><b>Purpose "Offers on similar products":</b> implicit consent enabled, confirmation text = the notice above, expiry e.g. 24 months. Custom attribute <i>Lawful basis: Legitimate interests / PECR reg. 22 soft opt-in</i>.</li>
+            <li><b>Box left unticked</b> → purpose recorded <code>ACTIVE</code> (implicit). <b>Box ticked</b> → <code>OPT_OUT</code> at collection.</li>
+            <li><b>Purpose "Partner offers":</b> explicit consent only — soft opt-in never covers third-party marketing. Ticked → <code>ACTIVE</code>, otherwise no record.</li>
+            <li><b>Newsletter pop-up:</b> explicit consent — no sale, so soft opt-in doesn't apply.</li>
+            <li><b>Show next:</b> data subject profile with both receipts, then opt out in <i>Marketing preferences</i> → status becomes <code>OPT_OUT</code>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Marketing preference centre -->
+      <div class="panel" id="panel-marketing">
+        <h2>Marketing preferences</h2>
+        <p class="lead">Choose what you'd like to hear about, how we contact you and how often. You can change this at any time.</p>
+
+        <div class="box">
+          <div class="row">
+            <div><div class="t">Receive marketing from Barclays</div><div class="d">Turn off to stop all marketing at once. Important service messages about your accounts will still reach you.</div></div>
+            <label class="tgl"><input type="checkbox" id="masterOpt"><span></span></label>
+          </div>
+        </div>
+
+        <div id="prefDetail">
+          <div class="box">
+            <h3>What you hear about</h3>
+            <p>Pick the topics that are useful to you.</p>
+            <p class="basis-legend"><span class="chip basis-soft">Soft opt-in</span> set when you opened a product — opt out any time. <span class="chip basis-consent">Consent</span> only on if you said yes.</p>
+            <div id="purposeList"></div>
+          </div>
+          <div class="box">
+            <h3>How we contact you</h3>
+            <p>Select the channels you're happy for us to use for marketing.</p>
+            <div class="chan" id="channelList"></div>
+          </div>
+          <div class="box">
+            <h3>How often</h3>
+            <p>Prefer fewer messages? Choose a lower frequency instead of opting out.</p>
+            <div class="seg" id="freqSeg">
+              <button data-v="weekly">Weekly</button>
+              <button data-v="monthly">Monthly</button>
+              <button data-v="quarterly">Quarterly</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="save-bar">
+          <button class="btn btn-navy" id="saveBtn">Save preferences</button>
+          <span class="stamp" id="prefStamp"></span>
+        </div>
+
+        <!-- ONETRUST HOSTED PREFERENCE CENTRE — shown when OT_CONFIG.prefCenterUrl is set -->
+        <div class="box" id="prefEmbedWrap" style="display:none;margin-top:22px">
+          <h3>OneTrust preference centre</h3>
+          <p>The same choices, served live from OneTrust.</p>
+          <iframe id="prefEmbed" title="Preference centre"></iframe>
+        </div>
+
+        <div class="box" style="margin-top:22px">
+          <h3>Consent history</h3>
+          <p>Every change is recorded with when and where it was made.</p>
+          <table class="history"><thead><tr><th>Date</th><th>Change</th><th>Source</th></tr></thead><tbody id="historyBody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Communication settings -->
+      <div class="panel" id="panel-comms">
+        <h2>Communication settings</h2>
+        <p class="lead">How we send you service information about your accounts.</p>
+        <div class="box">
+          <div class="row">
+            <div><div class="t">Paperless statements <span class="pill">On</span></div><div class="d">View statements in the app and online banking instead of by post.</div></div>
+            <label class="tgl"><input type="checkbox" checked data-pill><span></span></label>
+          </div>
+          <div class="row">
+            <div><div class="t">Spending notifications</div><div class="d">Push alerts when you pay or get paid.</div></div>
+            <label class="tgl"><input type="checkbox" checked><span></span></label>
+          </div>
+          <div class="row">
+            <div><div class="t">Security &amp; fraud alerts <span class="pill req">Required</span></div><div class="d">We'll always contact you about suspicious activity. These can't be switched off.</div></div>
+            <label class="tgl"><input type="checkbox" checked disabled><span></span></label>
+          </div>
+          <div class="row">
+            <div><div class="t">Account service messages <span class="pill req">Required</span></div><div class="d">Changes to terms, rates and charges. Required by regulation.</div></div>
+            <label class="tgl"><input type="checkbox" checked disabled><span></span></label>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Accessible formats</h3>
+          <p>Receive letters and statements in a format that works for you.</p>
+          <div class="seg" id="fmtSeg">
+            <button class="on">Standard</button><button>Large print</button><button>Braille</button><button>Audio</button>
+          </div>
+        </div>
+        <button class="btn btn-navy" onclick="toast('Communication settings saved')">Save settings</button>
+      </div>
+
+      <!-- Privacy -->
+      <div class="panel" id="panel-privacy">
+        <h2>Privacy &amp; cookies</h2>
+        <p class="lead">Control cookies on this device and find out how we use your data.</p>
+        <div class="box">
+          <h3>Cookie settings</h3>
+          <p id="cookieSummary">Review or change the cookies you've allowed on this device.</p>
+          <button class="btn btn-navy" data-cookie-settings>Manage cookie settings</button>
+        </div>
+        <div class="box">
+          <h3>Your data rights</h3>
+          <p>Request a copy of your data, ask us to correct it, or object to how we use it.</p>
+          <button class="btn btn-ghost" onclick="toast('Demo: this would open the OneTrust request form')">Make a privacy request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Products</h4><a href="index.html#products">Current accounts</a><a href="index.html#products">Savings</a><a href="index.html#products">Mortgages</a><a href="index.html#products">Credit cards</a></div>
+      <div><h4>Help</h4><a href="#">Contact us</a><a href="#">Report fraud</a><a href="#">Accessibility</a><a href="#">Find a branch</a></div>
+      <div><h4>About</h4><a href="#">About us</a><a href="#">Careers</a><a href="#">Sustainability</a></div>
+      <div><h4>Privacy</h4><a href="#">Privacy policy</a><a href="#">Cookie policy</a><a href="#" data-cookie-settings>Cookie settings</a><a href="#marketing">Marketing preferences</a></div>
+    </div>
+    <div class="legal">Demo environment built for a OneTrust product demonstration. Not affiliated with, endorsed by or operated by Barclays. No real accounts, logins or personal data. Photos: Unsplash. · <a href="#" data-reset-demo style="display:inline;color:#cfe6f2">Reset demo</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/account.js"></script>
+</body>
+</html>
