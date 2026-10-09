@@ -335,3 +335,5 @@ footer{background:var(--navy)}
 
 /* OneTrust form slot: no frame border if the form renders in an iframe */
 #ot-container iframe{border:0 !important;width:100% !important;display:block;background:transparent}
+.ot-soft-box{padding-top:18px}
+#ot-container > :first-child{margin-top:0 !important;padding-top:0 !important}

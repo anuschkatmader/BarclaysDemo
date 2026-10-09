@@ -95,6 +95,8 @@
     // Button
     '{P}button,{P}input[type=submit]{display:block;background:#5091F2 !important;color:#0B1240 !important;border:0 !important;border-radius:30px !important;padding:14px 30px !important;font-weight:600 !important;font-size:1.05rem !important;width:100% !important;cursor:pointer !important;margin:8px 0 0 !important}',
     '{P}button:hover,{P}input[type=submit]:hover{background:#6AA3F5 !important}',
+    '{P}button,{P}input[type=submit]{height:auto !important;min-height:0 !important;line-height:1.2 !important;flex:none !important;align-self:stretch !important}',
+    '{P}button *{font-size:1.05rem !important;font-weight:600 !important;color:#0B1240 !important;line-height:1.2 !important}',
     // Our opt-out row: same rhythm as the OneTrust text above it
     '{P}.soft-optout{display:flex !important;gap:12px;align-items:flex-start;margin:4px 0 18px !important;padding:0 !important;font-weight:400 !important;cursor:pointer}',
     '{P}.soft-optout span{font-size:.95rem !important}',
@@ -148,17 +150,44 @@
     el.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  // The hidden purpose checkbox = any checkbox in the form that isn't ours.
-  function purposeFields(root) {
+  // The hidden soft opt-in field = a checkbox that is ALREADY CHECKED when the form renders
+  // (hidden field, default value Checked). Explicit-consent boxes (e.g. partner offers) start
+  // unticked, so they are never touched.
+  var softKeys = null; // ids/names of the soft opt-in field(s), captured once at render
+  function allBoxes(root) {
     return Array.prototype.filter.call(root.querySelectorAll('input[type=checkbox]'), function (i) { return i.id !== 'softOptOutBox'; });
+  }
+  function keyOf(i) { return i.id ? '#' + i.id : (i.name ? 'name:' + i.name : ''); }
+  function purposeFields(root) {
+    var boxes = allBoxes(root);
+    if (!softKeys) softKeys = boxes.filter(function (i) { return i.checked; }).map(keyOf).filter(Boolean);
+    return boxes.filter(function (i) { return softKeys.indexOf(keyOf(i)) > -1; });
   }
   function syncHidden() {
     var root = softRoot(); if (!root) return;
     var out = optBox;
     var fields = purposeFields(root);
     fields.forEach(function (f) { if (f.checked === out.checked) setNative(f, 'checked', !out.checked); });
-    console.log('[soft opt-in] opt-out box ' + (out.checked ? 'TICKED' : 'unticked') + ' → hidden purpose field(s) now',
-      fields.map(function (f) { return f.checked ? 'checked' : 'unchecked'; }), fields.length ? '' : '(none found — see otSoftDebug())');
+    console.log('[soft opt-in] opt-out box ' + (out.checked ? 'TICKED' : 'unticked') + ' → soft opt-in field now',
+      fields.map(function (f) { return f.checked ? 'checked' : 'unchecked'; }),
+      '| other checkboxes left alone:', allBoxes(root).length - fields.length);
+  }
+
+  // Remove OneTrust's empty space above the first field.
+  function tidyTop(root) {
+    var c = document.querySelector(SOFT);
+    var first = root.querySelector('label, input[type=text], input[type=email]');
+    if (!first) return;
+    var el = first;
+    while (el && el !== c && el !== root) {
+      el.style.marginTop = '0'; el.style.paddingTop = '0';
+      var sib = el.previousElementSibling;
+      while (sib) {
+        if (!sib.textContent.trim() && !sib.querySelector('input, select, textarea, img')) sib.style.display = 'none';
+        sib = sib.previousElementSibling;
+      }
+      el = el.parentElement;
+    }
   }
 
   function prefill(root) {
@@ -186,7 +215,14 @@
     // Our opt-out box goes inside the form, right above the submit button.
     var opt = document.getElementById('softOptOut');
     opt.hidden = false;
-    submit.parentNode.insertBefore(opt, submit);
+    // Insert above the block that holds the button (not inside a flex row next to it).
+    var formEl = submit.closest('form') || root;
+    var anchor = submit;
+    while (anchor.parentNode && anchor.parentNode !== formEl && anchor.parentNode.children.length === 1) anchor = anchor.parentNode;
+    anchor.parentNode.insertBefore(opt, anchor);
+    var wrap = submit.parentNode;
+    if (wrap && wrap !== formEl) { wrap.style.display = 'block'; wrap.style.width = '100%'; }
+    tidyTop(root);
     opt.querySelector('input').addEventListener('change', syncHidden);
 
     // Re-sync at the last moment, in case the form re-rendered the hidden field.
