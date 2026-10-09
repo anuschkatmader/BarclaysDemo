@@ -332,3 +332,6 @@ footer{background:var(--navy)}
 .chip.st-OPT_OUT,.chip.st-WITHDRAWN{background:#FDECEA;color:#B3261E}
 .chip.st-NO_CONSENT{background:#EEF1F3;color:var(--muted)}
 .basis-legend{font-size:.82rem;color:var(--muted);margin:-6px 0 10px}
+
+/* OneTrust form slot: no frame border if the form renders in an iframe */
+#ot-container iframe{border:0 !important;width:100% !important;display:block;background:transparent}

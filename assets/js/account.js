@@ -80,24 +80,51 @@
   var optBox = document.getElementById('softOptOutBox'); // kept as a reference: it may move into a shadow root
 
   var THEME = [
-    '{P}*{font-family:"Figtree","Helvetica Neue",Arial,sans-serif !important;box-shadow:none !important}',
-    '{P}form,{P}fieldset{background:transparent !important;border:0 !important;margin:0 !important;padding:0 !important;max-width:none !important;width:100% !important}',
-    '{P}label{color:#11132A !important;font-weight:700 !important;font-size:.88rem !important;margin-bottom:6px !important}',
-    '{P}input[type=text],{P}input[type=email],{P}input[type=tel],{P}select,{P}textarea{width:100% !important;box-sizing:border-box !important;padding:12px 14px !important;border:1px solid #9FB1BD !important;border-radius:6px !important;background:#fff !important;color:#11132A !important;font-size:1rem !important;margin-bottom:14px !important}',
+    // No frame: strip borders/backgrounds/shadows from every wrapper OneTrust renders
+    '{P}*:not(input):not(select):not(textarea):not(button){border:0 !important;background:transparent !important;box-shadow:none !important;outline:0 !important}',
+    '{P}*{font-family:"Figtree","Helvetica Neue",Arial,sans-serif !important}',
+    '{P}form,{P}fieldset{margin:0 !important;padding:0 !important;max-width:none !important;width:100% !important}',
+    '{P}form > *,{P}fieldset > *{max-width:none !important}',
+    // Labels and text in the site style
+    '{P}label{display:block;color:#11132A !important;font-weight:700 !important;font-size:.88rem !important;margin:0 0 6px !important}',
+    '{P}p,{P}span,{P}div{color:#11132A !important;font-size:.95rem;line-height:1.5}',
+    // Fields
+    '{P}input[type=text],{P}input[type=email],{P}input[type=tel],{P}select,{P}textarea{width:100% !important;box-sizing:border-box !important;padding:12px 14px !important;border:1px solid #9FB1BD !important;border-radius:6px !important;background:#fff !important;color:#11132A !important;font-size:1rem !important;margin:0 0 16px !important}',
     '{P}input:focus,{P}select:focus,{P}textarea:focus{outline:2px solid #5091F2 !important;border-color:#5091F2 !important}',
-    '{P}p,{P}span,{P}div{color:#11132A}',
-    '{P}input[type=checkbox]{accent-color:#2F6FDB;width:18px;height:18px}',
-    '{P}button,{P}input[type=submit]{background:#5091F2 !important;color:#0B1240 !important;border:0 !important;border-radius:30px !important;padding:14px 30px !important;font-weight:600 !important;font-size:1.05rem !important;width:100% !important;cursor:pointer !important;margin-top:8px !important}',
+    '{P}input[type=checkbox]{accent-color:#2F6FDB;width:18px !important;height:18px !important;margin:2px 0 0 !important;flex-shrink:0}',
+    // Button
+    '{P}button,{P}input[type=submit]{display:block;background:#5091F2 !important;color:#0B1240 !important;border:0 !important;border-radius:30px !important;padding:14px 30px !important;font-weight:600 !important;font-size:1.05rem !important;width:100% !important;cursor:pointer !important;margin:8px 0 0 !important}',
     '{P}button:hover,{P}input[type=submit]:hover{background:#6AA3F5 !important}',
-    '{P}.soft-optout{display:flex !important;gap:10px;align-items:flex-start;margin:4px 0 14px !important;font-weight:400 !important}',
-    '{P}.soft-optout strong{display:block;font-weight:700}',
-    '{P}.soft-optout .d{display:block;color:#5B5F73 !important;font-size:.84rem;font-weight:400}',
-    '{P}.soft-optout input{margin-top:3px;flex-shrink:0}'
+    // Our opt-out row: same rhythm as the OneTrust text above it
+    '{P}.soft-optout{display:flex !important;gap:12px;align-items:flex-start;margin:4px 0 18px !important;padding:0 !important;font-weight:400 !important;cursor:pointer}',
+    '{P}.soft-optout span{font-size:.95rem !important}',
+    '{P}.soft-optout strong{display:block;font-weight:600 !important;font-size:.95rem !important;color:#11132A !important}',
+    '{P}.soft-optout .d{display:block;color:#5B5F73 !important;font-size:.88rem !important;margin-top:2px}'
   ].join('\n');
 
+  // Where the form's fields live: straight in the container, in a shadow root, or in a frame.
+  var frameWarned = false;
+  function styleFrame(f) {
+    f.style.border = '0'; f.style.width = '100%'; f.style.display = 'block'; f.style.background = 'transparent';
+  }
   function softRoot() {
     var c = document.querySelector(SOFT);
-    return c && c.shadowRoot ? c.shadowRoot : c;
+    if (!c) return null;
+    if (c.shadowRoot) return c.shadowRoot;
+    var f = c.querySelector('iframe');
+    if (f) {
+      styleFrame(f);
+      var d = null;
+      try { d = f.contentDocument; } catch (e) {}
+      if (d && d.body && d.querySelector('input')) return d;
+      if (!frameWarned && !d) {
+        frameWarned = true;
+        console.warn('[soft opt-in] The OneTrust form is inside a frame served from OneTrust\'s domain. ' +
+          'The browser blocks this page from styling or changing anything inside it — use the web form\'s Branding tab in OneTrust instead.');
+      }
+      return null;
+    }
+    return c;
   }
   function injectTheme(root) {
     if (!document.getElementById('ot-soft-theme')) {
@@ -108,7 +135,7 @@
     if (root !== document.querySelector(SOFT) && !root.getElementById('ot-soft-theme')) {
       var t = document.createElement('style'); t.id = 'ot-soft-theme';
       t.textContent = THEME.replace(/\{P\}/g, '');
-      root.appendChild(t); // form lives in a shadow root
+      (root.head || root).appendChild(t); // form lives in a shadow root or a same-origin frame
     }
   }
 
@@ -207,10 +234,6 @@
     }, 200);
   }
 
-  document.getElementById('notesToggle').addEventListener('click', function () {
-    var n = document.getElementById('notes'); n.hidden = !n.hidden;
-    this.setAttribute('aria-expanded', String(!n.hidden));
-  });
 
   /* ---------------------------- Preference centre ---------------------------- */
   function render() {

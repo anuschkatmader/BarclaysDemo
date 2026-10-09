@@ -88,7 +88,7 @@
   var BANNER = ''
     + '<div class="overlay" id="cookieModal" role="dialog" aria-modal="true" aria-labelledby="ckTitle">'
     + ' <div class="modal">'
-    + '  <div class="head"><div class="brand">Barclays <small>Demo</small></div><h2 id="ckTitle">We value your privacy</h2></div>'
+    + '  <div class="head"><div class="brand">Barclays</div><h2 id="ckTitle">We value your privacy</h2></div>'
     + '  <div class="body">'
     + '   <div id="ckMain">'
     + '    <p>We use cookies to make our website work, to understand how you use it and to show you relevant content and ads. You can accept all cookies, reject non-essential ones, or choose which to allow.</p>'

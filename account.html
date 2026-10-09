@@ -34,7 +34,7 @@
 
 <header class="main">
   <div class="wrap">
-    <a href="index.html" class="brand">Barclays <small>Demo</small></a>
+    <a href="index.html" class="brand">Barclays</a>
     <button class="seg-pill">Personal
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
     </button>
@@ -158,18 +158,6 @@
           </div>
         </div>
 
-        <button class="notes-toggle" id="notesToggle" aria-expanded="false">Presenter notes</button>
-        <div class="notes" id="notes" hidden>
-          <h4>Soft opt-in vs explicit consent — OneTrust setup</h4>
-          <ul>
-            <li><b>Collection point:</b> "Account Opening - Soft Opt-In" (this form). The newsletter pop-up on the homepage is a separate collection point with explicit consent.</li>
-            <li><b>Purpose "Offers on products similar to yours":</b> implicit consent ON, lifespan 24 months, "show explicit consent checkbox in preference centre" ON. Lawful basis: legitimate interests / PECR reg. 22 soft opt-in.</li>
-            <li><b>In the form:</b> the purpose is a hidden field, default Checked, so submitting records implicit consent → <code>ACTIVE</code> without the customer ticking anything.</li>
-            <li><b>Refusal at collection:</b> ticking "I don't want to receive offers…" unticks that hidden field before submit, so the purpose isn't granted.</li>
-            <li><b>No double opt-in</b> on this form — nothing to confirm; the customer is already verified. The newsletter can use double opt-in (<code>PENDING</code> until confirmed).</li>
-            <li><b>Show next:</b> the data subject's receipt in OneTrust, then <i>Marketing preferences</i> → confirm explicitly or opt out (<code>OPT_OUT</code>).</li>
-          </ul>
-        </div>
       </div>
 
       <!-- Marketing preference centre -->
