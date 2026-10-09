@@ -105,6 +105,13 @@
       el = el.parentElement;
     }
   }
+  function imp(el, props) { Object.keys(props).forEach(function (k) { el.style.setProperty(k, props[k], 'important'); }); }
+  function fitButton(btn, container) {
+    imp(btn, { 'box-sizing': 'border-box', 'width': '100%', 'max-width': '100%', 'margin-left': '0', 'margin-right': '0',
+               'border-radius': '30px', 'height': 'auto', 'min-height': '0', 'padding': '14px 30px', 'display': 'block' });
+    var el = btn.parentElement;
+    while (el && el !== container) { imp(el, { 'overflow': 'visible', 'max-width': '100%', 'box-sizing': 'border-box' }); el = el.parentElement; }
+  }
   function labelText(root, box) {
     var l = (box.id && root.querySelector('label[for="' + box.id + '"]')) || box.closest('label') || box.parentElement;
     return l ? l.textContent.toLowerCase() : '';
@@ -119,6 +126,7 @@
     wired = true;
     injectTheme(root);
     tidyTop(root);
+    fitButton(submit, document.querySelector(SEL));
     var form = submit.closest('form');
     var wrap = submit.parentNode;
     if (wrap && wrap !== form) { wrap.style.display = 'block'; wrap.style.width = '100%'; wrap.style.boxSizing = 'border-box'; wrap.style.padding = '0'; wrap.style.overflow = 'visible'; }

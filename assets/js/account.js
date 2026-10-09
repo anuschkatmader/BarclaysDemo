@@ -21,8 +21,24 @@
     // Account-opening form: install only once its container is visible and laid out.
     if (id === 'open') requestAnimationFrame(function () { requestAnimationFrame(function () {
       Demo.installForm('#ot-container', OT.softOptInCpId);
+      ensureSoftForm(0);
     }); });
   }
+  // If the form hasn't appeared a few seconds after the tab is shown, install it again (up to 3 tries).
+  function ensureSoftForm(attempt) {
+    if (!OT.softOptInCpId || attempt >= 3) return;
+    setTimeout(function () {
+      var panelOpen = document.getElementById('panel-open').classList.contains('active');
+      var c = document.querySelector('#ot-container');
+      var rendered = c && (c.querySelector('input') || c.querySelector('iframe') || c.shadowRoot);
+      if (panelOpen && !rendered && !softWired) {
+        console.log('[soft opt-in] form not rendered yet — retrying install (' + (attempt + 1) + '/3)');
+        Demo.reinstallForm('#ot-container', OT.softOptInCpId);
+        ensureSoftForm(attempt + 1);
+      }
+    }, 3500);
+  }
+
   document.querySelectorAll('.side button').forEach(function (b) {
     b.addEventListener('click', function () { history.replaceState(null, '', '#' + b.dataset.panel); showPanel(b.dataset.panel); });
   });
@@ -175,6 +191,19 @@
       '| other checkboxes left alone:', allBoxes(root).length - fields.length);
   }
 
+  // Inline !important beats any OneTrust stylesheet rule, so the button can't overflow and get clipped.
+  function imp(el, props) { Object.keys(props).forEach(function (k) { el.style.setProperty(k, props[k], 'important'); }); }
+  function fitButton(btn, container) {
+    imp(btn, { 'box-sizing': 'border-box', 'width': '100%', 'max-width': '100%', 'margin-left': '0', 'margin-right': '0',
+               'border-radius': '30px', 'height': 'auto', 'min-height': '0', 'padding': '14px 30px', 'display': 'block' });
+    var el = btn.parentElement;
+    while (el && el !== container) {
+      imp(el, { 'overflow': 'visible', 'max-width': '100%', 'box-sizing': 'border-box' });
+      el = el.parentElement;
+    }
+    if (container) imp(container, { 'overflow': 'visible' });
+  }
+
   // Remove OneTrust's empty space above the first field.
   function tidyTop(root) {
     var c = document.querySelector(SOFT);
@@ -225,6 +254,7 @@
     var wrap = submit.parentNode;
     if (wrap && wrap !== formEl) { wrap.style.display = 'block'; wrap.style.width = '100%'; wrap.style.boxSizing = 'border-box'; wrap.style.padding = '0'; wrap.style.overflow = 'visible'; }
     tidyTop(root);
+    fitButton(submit, document.querySelector(SOFT));
     opt.querySelector('input').addEventListener('change', syncHidden);
 
     // Re-sync at the last moment, in case the form re-rendered the hidden field.

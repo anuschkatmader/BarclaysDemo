@@ -41,8 +41,8 @@ Then commit `assets/img`. To swap a photo, replace the file with the same name
 | File | Used on |
 |---|---|
 | hero.jpg | Homepage hero |
-| subscriptions.jpg | Offers & subscriptions card |
-| credit-card.jpg | Platinum card feature |
+| streaming.jpg | Offers & subscriptions card |
+| card-payment.jpg | Platinum card feature |
 | family-cycling.jpg | "Good money habits" section |
 | mortgage.jpg | Mortgage section |
 | newsletter.jpg | Newsletter pop-up header |

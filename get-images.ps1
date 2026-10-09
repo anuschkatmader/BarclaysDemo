@@ -4,8 +4,8 @@ $ErrorActionPreference = "Stop"
 $dir = Join-Path $PSScriptRoot "assets\img"
 $photos = @(
   @("hero.jpg",           "photo-1770872937837-267dadb4a138", "w=1800&h=1000"),
-  @("subscriptions.jpg",  "photo-1758273705845-095eaa831790", "w=1000&h=800"),
-  @("credit-card.jpg",    "photo-1728763377830-013769bc88b3", "w=1800&h=900"),
+  @("streaming.jpg",      "photo-1586899028174-e7098604235b", "w=1000&h=800"),
+  @("card-payment.jpg",   "photo-1556742031-c6961e8560b0", "w=1800&h=900"),
   @("family-cycling.jpg", "photo-1643632540114-5e2b3753919d", "w=1200&h=900"),
   @("mortgage.jpg",       "photo-1758523671285-9ff3f4e0ff38", "w=1200&h=900"),
   @("newsletter.jpg",     "photo-1573496782432-8690d8148c46", "w=1000&h=380"),

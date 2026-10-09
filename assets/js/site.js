@@ -76,6 +76,13 @@
     whenOTReady(function () { OneTrust.webform.InstallCP(cpId, { target: target }); });
   };
 
+  // Retry an install that came back empty (the SDK sometimes isn't fully ready on first call).
+  Demo.reinstallForm = function (target, cpId) {
+    delete installed[target];
+    var c = document.querySelector(target); if (c) c.innerHTML = '';
+    Demo.installForm(target, cpId);
+  };
+
   // OneTrust-style status for a purpose (what the data subject profile would show).
   Demo.status = function (p) {
     if (p.on) return 'ACTIVE';
